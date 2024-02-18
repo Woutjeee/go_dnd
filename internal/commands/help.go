@@ -2,12 +2,14 @@ package commands
 
 import (
 	"fmt"
+
+	"github.com/Woutjeee/go_dnd/internal/configuration"
 )
 
-func Help() error {
+func Help(cfg *configuration.Config) error {
 	fmt.Println("The following commands are available.")
 
-	for _, command := range GetCommands() {
+	for _, command := range GetCommands(cfg) {
 		fmt.Printf(`
 --------------  %s  ----------------
 The command name: %s

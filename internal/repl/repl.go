@@ -15,7 +15,7 @@ func StartRepl(cfg *configuration.Config) {
 	fmt.Println("Starting REPL session.")
 
 	// Get all the current registered commands.
-	c := commands.GetCommands()
+	c := commands.GetCommands(cfg)
 
 	// Start a reader to get input of what the user entered.
 	reader := bufio.NewScanner(os.Stdin)
@@ -31,7 +31,7 @@ func StartRepl(cfg *configuration.Config) {
 
 		// Check if the command exists, if it does execute it.
 		if commad, exists := c[text]; exists {
-			err := commad.Command()
+			err := commad.Command(cfg)
 			if err != nil {
 				fmt.Println("Error executing command:", err)
 			}
@@ -41,7 +41,7 @@ func StartRepl(cfg *configuration.Config) {
 	}
 }
 
-var flagRegex = regexp.MustCompile(`(-\S+)\s*(".*?"|\S+)?`)
+var flagRegex = regexp.MustCompile(`(-\S+)\s*('[^']*'|\S+)?`)
 
 func cleanInput(text string) string {
 	output := strings.TrimSpace(text)
@@ -49,12 +49,12 @@ func cleanInput(text string) string {
 	matches := flagRegex.FindAllStringSubmatch(output, -1)
 
 	result := make(map[string]string)
-
 	for _, match := range matches {
 		flag := match[1]
 		value := match[2]
 
 		if value != "" {
+			value = strings.Trim(value, "'")
 			result[flag] = value
 		}
 	}

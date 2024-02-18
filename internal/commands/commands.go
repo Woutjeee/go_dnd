@@ -1,23 +1,28 @@
 package commands
 
+import "github.com/Woutjeee/go_dnd/internal/configuration"
+
 type Command struct {
-	Name        string
-	Description string
-	Flags       map[string]string
-	Command     func() error
+	Name           string
+	Description    string
+	AvailableFlags map[string]string
+	Command        func(cfg *configuration.Config) error
 }
 
-func GetCommands() map[string]Command {
+func GetCommands(cfg *configuration.Config) map[string]Command {
 	return map[string]Command{
 		"help": {
 			Name:        "help",
 			Description: "A command that helps the user by printing the available commands.",
-			Command:     Help,
+			AvailableFlags: map[string]string{
+				"-h": "test flag",
+			},
+			Command: Help,
 		},
 		"exit": {
 			Name:        "exit",
 			Description: "Exits the app.",
-			Command:     exit,
+			Command:     Exit,
 		},
 		"create character": {
 			Name:        "create character",
