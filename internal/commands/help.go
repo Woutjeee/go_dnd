@@ -13,7 +13,7 @@ func Help() error {
 The command name: %s
 The command description: %s
 ------------------------------------
-			`, command.Name, command.Name, command.Description)
+`, command.Name, command.Name, command.Description)
 	}
 
 	fmt.Println("To use the commands, enter the name of it and it will execute it.")
