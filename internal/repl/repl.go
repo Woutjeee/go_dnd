@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/Woutjeee/go_dnd/internal/commands"
@@ -40,9 +41,26 @@ func StartRepl(cfg *configuration.Config) {
 	}
 }
 
+var flagRegex = regexp.MustCompile(`(-\S+)\s*(".*?"|\S+)?`)
+
 func cleanInput(text string) string {
 	output := strings.TrimSpace(text)
 	output = strings.ToLower(output)
+	matches := flagRegex.FindAllStringSubmatch(output, -1)
+
+	result := make(map[string]string)
+
+	for _, match := range matches {
+		flag := match[1]
+		value := match[2]
+
+		if value != "" {
+			result[flag] = value
+		}
+	}
+
+	fmt.Println(result)
+
 	return output
 }
 
