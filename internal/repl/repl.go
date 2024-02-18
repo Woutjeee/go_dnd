@@ -33,8 +33,6 @@ func StartRepl(cfg *configuration.Config) {
 			err := commad.Command()
 			if err != nil {
 				fmt.Println("Error executing command:", err)
-			} else {
-				fmt.Println("Executed commmand:", commad.Name)
 			}
 		} else {
 			// Command did not exists.
