@@ -1,10 +1,5 @@
 package commands
 
-import (
-	"fmt"
-	"os"
-)
-
 type Command struct {
 	Name        string
 	Description string
@@ -29,11 +24,4 @@ func GetCommands() map[string]Command {
 			Command:     Create,
 		},
 	}
-
-}
-
-func exit() error {
-	fmt.Println("Stopping REPL session.")
-	os.Exit(0)
-	return nil
 }
