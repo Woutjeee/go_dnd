@@ -6,14 +6,15 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Woutjeee/go_dnd/internal/commmands"
+	"github.com/Woutjeee/go_dnd/internal/commands"
+	"github.com/Woutjeee/go_dnd/internal/configuration"
 )
 
-func StartRepl() {
+func StartRepl(cfg *configuration.Config) {
 	fmt.Println("Starting REPL session.")
 
 	// Get all the current registered commands.
-	c := commmands.GetCommands()
+	c := commands.GetCommands()
 
 	// Start a reader to get input of what the user entered.
 	reader := bufio.NewScanner(os.Stdin)
@@ -32,6 +33,8 @@ func StartRepl() {
 			err := commad.Command()
 			if err != nil {
 				fmt.Println("Error executing command:", err)
+			} else {
+				fmt.Println("Executed commmand:", commad.Name)
 			}
 		} else {
 			// Command did not exists.
