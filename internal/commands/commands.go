@@ -6,10 +6,14 @@ type Command struct {
 	Name           string
 	Description    string
 	AvailableFlags map[string]string
-	Command        func(cfg *configuration.Config) error
+	Command        func(cfg *configuration.Config, flags map[string]string) error
 }
 
-func GetCommands(cfg *configuration.Config) map[string]Command {
+func (cmd Command) Execute(cfg *configuration.Config, flags map[string]string) error {
+	return cmd.Command(cfg, flags)
+}
+
+func GetCommands(cfg *configuration.Config, flags map[string]string) map[string]Command {
 	return map[string]Command{
 		"help": {
 			Name:        "help",
@@ -24,10 +28,13 @@ func GetCommands(cfg *configuration.Config) map[string]Command {
 			Description: "Exits the app.",
 			Command:     Exit,
 		},
-		"create character": {
+		"create": {
 			Name:        "create character",
 			Description: "Starts the character creation proccess.",
-			Command:     Create,
+			AvailableFlags: map[string]string{
+				"-n": "name of character",
+			},
+			Command: Create,
 		},
 	}
 }

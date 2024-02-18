@@ -6,10 +6,10 @@ import (
 	"github.com/Woutjeee/go_dnd/internal/configuration"
 )
 
-func Help(cfg *configuration.Config) error {
+func Help(cfg *configuration.Config, flags map[string]string) error {
 	fmt.Println("The following commands are available.")
 
-	for _, command := range GetCommands(cfg) {
+	for _, command := range GetCommands(cfg, flags) {
 		fmt.Printf(`
 --------------  %s  ----------------
 The command name: %s

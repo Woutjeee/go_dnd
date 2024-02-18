@@ -6,9 +6,7 @@ import (
 )
 
 func main() {
-	config := configuration.Config{
-		LastCommand: "none",
-	}
+	config := configuration.Config{}
 
 	repl.StartRepl(&config)
 }
