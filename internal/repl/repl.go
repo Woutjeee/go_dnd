@@ -32,10 +32,14 @@ func StartRepl(cfg *configuration.Config) {
 
 		// Check if the command exists, if it does execute it.
 		if commad, exists := c[text]; exists {
-			err := commad.Command(cfg, flags)
+			cfg.LastCommand = commad
+			cfg.LastFlags = flags
+			err := commad.Command(cfg)
 			if err != nil {
 				fmt.Println("Error executing command:", err)
 			}
+		} else {
+			cfg.LastCommand = commad
 		}
 		// Print repl again.
 		printRepl()

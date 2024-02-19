@@ -6,8 +6,8 @@ import (
 	"github.com/Woutjeee/go_dnd/internal/configuration"
 )
 
-func Create(cfg *configuration.Config, flags map[string]string) error {
-	fmt.Println(flags)
+func Create(cfg *configuration.Config) error {
+	fmt.Println(cfg.LastFlags)
 
 	return nil
 }

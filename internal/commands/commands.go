@@ -2,7 +2,7 @@ package commands
 
 import "github.com/Woutjeee/go_dnd/internal/configuration"
 
-func GetCommands(cfg *configuration.Config, flags map[string]string) map[string]configuration.Command {
+func GetCommands(cfg *configuration.Config) map[string]configuration.Command {
 	return map[string]configuration.Command{
 		"help": {
 			Name:        "help",

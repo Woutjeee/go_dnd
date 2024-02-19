@@ -6,7 +6,7 @@ import (
 	"github.com/Woutjeee/go_dnd/internal/configuration"
 )
 
-func Exit(cfg *configuration.Config, flags map[string]string) error {
+func Exit(cfg *configuration.Config) error {
 	os.Exit(0)
 	return nil
 }

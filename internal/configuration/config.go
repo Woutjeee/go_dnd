@@ -9,5 +9,5 @@ type Command struct {
 	Name           string
 	Description    string
 	AvailableFlags map[string]string
-	Command        func(cfg *Config, flags map[string]string) error
+	Command        func(cfg *Config) error
 }
