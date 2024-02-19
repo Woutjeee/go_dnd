@@ -15,8 +15,7 @@ func StartRepl(cfg *configuration.Config) {
 	fmt.Println("Starting REPL session.")
 
 	// Get all the current registered commands.
-	emptyFlags := make(map[string]string)
-	c := commands.GetCommands(cfg, emptyFlags)
+	c := commands.GetCommands(cfg)
 
 	// Start a reader to get input of what the user entered.
 	reader := bufio.NewScanner(os.Stdin)
