@@ -1,10 +1,13 @@
 package configuration
 
-type CommandExecuter interface {
-	Execute(cfg *Config, flags map[string]string)
+type Config struct {
+	LastCommand Command
+	LastFlags   map[string]string
 }
 
-type Config struct {
-	LastCommand CommandExecuter
-	LastFlags   map[string]string
+type Command struct {
+	Name           string
+	Description    string
+	AvailableFlags map[string]string
+	Command        func(cfg *Config, flags map[string]string) error
 }
